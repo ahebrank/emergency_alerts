@@ -1,0 +1,9 @@
+emergency_alerts:
+  version: 1.x
+  js:
+    js/persist-close.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once

@@ -1,0 +1,20 @@
+emergency_alerts.settings:
+  type: config_object
+  mapping:
+    override:
+      type: boolean
+      label: 'Override every page with alert'
+    show_block:
+      type: boolean
+      label: 'Show region on page templates'
+    alert_level:
+      type: string
+      label: 'Alert serverity'
+    alert_title:
+      type: string
+      label: 'Alert title'
+    alert_message:
+      type: config_object
+      label: 'Alert message'
+      value: string
+      format: string

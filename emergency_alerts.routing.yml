@@ -1,0 +1,7 @@
+emergency_alerts.settings:
+  path: '/admin/config/emergency_alerts'
+  defaults:
+    _form: '\Drupal\emergency_alerts\Form\SettingsForm'
+    _title: 'Settings'
+  requirements:
+    _permission: 'administer emergency_alerts'

@@ -1,0 +1,5 @@
+emergency_alerts.settings:
+  title: 'Emergency alerts'
+  parent: system.admin_structure
+  description: 'Configure and enable/disable emergency alerts.'
+  route_name: emergency_alerts.settings

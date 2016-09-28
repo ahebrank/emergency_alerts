@@ -1,0 +1,69 @@
+{#
+/**
+ * @file
+ * Theme override for the basic structure of a single Drupal page.
+ *
+ * Variables:
+ * - logged_in: A flag indicating if user is logged in.
+ * - root_path: The root path of the current page (e.g., node, admin, user).
+ * - node_type: The content type for the current node, if the page is a node.
+ * - head_title: List of text elements that make up the head_title variable.
+ *   May contain or more of the following:
+ *   - title: The title of the page.
+ *   - name: The name of the site.
+ *   - slogan: The slogan of the site.
+ * - page_top: Initial rendered markup. This should be printed before 'page'.
+ * - page: The rendered page markup.
+ * - page_bottom: Closing rendered markup. This variable should be printed after
+ *   'page'.
+ * - db_offline: A flag indicating if the database is offline.
+ * - placeholder_token: The token for generating head, css, js and js-bottom
+ *   placeholders.
+ * - html_attributes: Raw HTML attributes for the <html> tag.
+ *   Contains langcode and text direction.
+ *
+ * @see template_preprocess_html()
+ */
+#}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cleveland Institute of Music</title>
+
+    <style>
+      body {
+        background-color: red;
+        min-height: 1000px;
+      }
+      #content-wrapper {
+        width: 950px;
+        max-width: 100%;
+        margin: 0 auto;
+      }
+      #logo {
+        margin-bottom: 80px;
+      }
+    </style>
+
+  </head>
+  <body>
+    <div id="content-wrapper">
+
+      <div id="logo"></div>
+
+      <svg style="float:left;" height="46" width="46" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 46">
+        <path fill="#009380" fill-rule="evenodd" d="M 23 0 C 35.7 0 46 10.3 46 23 C 46 35.7 35.7 46 23 46 C 10.3 46 0 35.7 0 23 C 0 10.3 10.3 0 23 0 Z" />
+        <text font-size="35" fill="#00585f" y="36" x="20">
+            <tspan>!</tspan>
+        </text>
+      </svg>
+      <h1>{{ title }}</h1>
+
+      {{ message }}
+    </div>
+  </body>
+</html>

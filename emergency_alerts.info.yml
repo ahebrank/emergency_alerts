@@ -1,0 +1,6 @@
+name: Emergency Alerts
+type: module
+description: Show emergency alerts of varying severity
+core: 8.x
+package: NewCity
+configure: emergency_alerts.settings
