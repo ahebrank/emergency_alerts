@@ -3,7 +3,6 @@
 namespace Drupal\emergency_alerts\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Cache\Cache;
 
 /**
  * Provides an 'EmergencyAlert' Block
