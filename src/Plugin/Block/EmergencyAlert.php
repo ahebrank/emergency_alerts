@@ -3,6 +3,7 @@
 namespace Drupal\emergency_alerts\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Cache\Cache;
 
 /**
  * Provides an 'EmergencyAlert' Block
@@ -13,11 +14,14 @@ use Drupal\Core\Block\BlockBase;
  * )
  */
 class EmergencyAlert extends BlockBase {
+  
+  var $config_key = 'emergency_alerts.settings';
+  
   /**
    * {@inheritdoc}
    */
   public function build() {
-  	$config = \Drupal::config('emergency_alerts.settings');
+  	$config = \Drupal::config($this->config_key);
 
   	// get config variables
   	$message = $config->get('alert_message');
@@ -32,15 +36,10 @@ class EmergencyAlert extends BlockBase {
   	}
 
   	// should alert be shown?
-  	$show_alert = $config->get('show_block') 
+  	$show_alert = $config->get('show_block')
   		&& ($level != 'announcement' || !$cookie_set);
 
     $render = [
-      '#cache' => [
-      	'tags' => [
-      		'config:emergency_alerts.settings',
-      	],
-      ],
       '#theme' => 'emergency_alert',
       '#alert_on' => $show_alert,
       '#title' => $config->get('alert_title'),
@@ -50,6 +49,8 @@ class EmergencyAlert extends BlockBase {
       ],
       '#alert_level' => $level,
     ];
+
+    $render['#cache']['tags'][] = 'config:'.$this->config_key;
 
     return $render;
   }
