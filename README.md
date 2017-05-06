@@ -4,9 +4,11 @@ A Drupal 8 module to provide emergency alerts.
 
 ## Quickstart
 
-Enable this module and configure to set alert title and message, severity, and to turn on block or full page override.
+Enable this module and configure to set alert title and message,
+severity, and to turn on block or full page override.
 
-(optional) Add region `emergency_alert` to your theme and in templates. For example (in theme.info.yml),
+(optional) Add region `emergency_alert` to your theme and in templates.
+For example (in theme.info.yml),
 
 ```yml
 regions:
@@ -16,9 +18,11 @@ regions:
   emergency_alert: 'Emergency alert'
 ```
 
-Place the `Emergency Alert` block created by this module in the region you added above or in any other region.
+Place the `Emergency Alert` block created by this module 
+in the region you added above or in any other region.
 
-Copy template `html--emergency-alert.html.twig` (for full-page alert) to your theme and edit (but keep the `page.emergency_alert` region)
+Copy template `html--emergency-alert.html.twig` (for full-page alert) to your 
+theme and edit (but keep the `page.emergency_alert` region)
 
 Copy template `emergency-alert.html.twig` to your theme and edit as needed.
 

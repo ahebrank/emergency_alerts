@@ -72,13 +72,13 @@ class SettingsForm extends ConfigFormBase {
       '#default_value' => $config->get('alert_title'),
     ];
 
-    $message = $config->get('alert_message', null);
+    $message = $config->get('alert_message', NULL);
     $form['control']['alert_message'] = [
       '#type'  => 'text_format',
       '#title' => t('Alert message'),
       '#description' => '',
-      '#format' => $message? $message['format']:'basic_html',
-      '#default_value' => $message? $message['value']:'',
+      '#format' => $message ? $message['format'] : 'basic_html',
+      '#default_value' => $message ? $message['value'] : '',
     ];
 
     return parent::buildForm($form, $form_state);
