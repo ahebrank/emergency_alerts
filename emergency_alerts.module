@@ -11,59 +11,60 @@ use Drupal\Core\Routing\RouteMatchInterface;
  * Implements hook_help().
  */
 function emergency_alerts_help($route_name, RouteMatchInterface $route_match) {
-	switch ($route_name) {
-	    // Main module help for the emergency_alerts module.
-		case 'help.page.emergency_alerts':
-			$output = '';
-			$output .= '<h3>' . t('About') . '</h3>';
-			$output .= '<p>' . t('Show emergency alerts of varying severity') . '</p>';
-			return $output;
+  switch ($route_name) {
+    // Main module help for the emergency_alerts module.
+    case 'help.page.emergency_alerts':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Show emergency alerts of varying severity') . '</p>';
+      return $output;
 
-		default:
-		}
+    default:
+  }
 }
 
 /**
- * Implements hook_theme_suggestions_html_alter()
+ * Implements hook_theme_suggestions_html_alter().
  */
 function emergency_alerts_theme_suggestions_html_alter(array &$suggestions, array &$variables) {
-	$config = \Drupal::config('emergency_alerts.settings');
-	if ($config->get('override')) {
-		$suggestions[] = 'html__emergency_alert';
+  $config = \Drupal::config('emergency_alerts.settings');
+  if ($config->get('override')) {
+    $suggestions[] = 'html__emergency_alert';
 
-		$message = $config->get('alert_message');
+    $message = $config->get('alert_message');
 
-		$variables['title'] = $config->get('alert_title');
-		$variables['message'] = [
-			'#type' => 'markup',
-      		'#markup' => $message['value'],
-		];
-		$variables['alert_level'] = $config->get('alert_level');
-	}
+    $variables['title'] = $config->get('alert_title');
+    $variables['message'] = [
+      '#type' => 'markup',
+      '#markup' => $message['value'],
+    ];
+    $variables['alert_level'] = $config->get('alert_level');
+  }
 }
 
 /**
- * Implements hook_page_attachements()
+ * Implements hook_page_attachements().
  */
 function emergency_alerts_page_attachments(array &$page) {
-	$config = \Drupal::config('emergency_alerts.settings');
-	if ($config->get('show_block')) {
-		$page['#attached']['library'][] = 'emergency_alerts/emergency_alerts';
-	}
+  $config = \Drupal::config('emergency_alerts.settings');
+  if ($config->get('show_block')) {
+    $page['#attached']['library'][] = 'emergency_alerts/emergency_alerts';
+  }
 }
 
 /**
- * Implements hook_theme()
+ * Implements hook_theme().
  */
 function emergency_alerts_theme($existing, $type, $theme, $path) {
-  	return ['emergency_alert' => 
-  		[
+  return [
+    'emergency_alert' =>
+          [
             'variables' => [
-	        	'alert_on' => false,
-                'title' => 'Alert',
-                'message' => null,
-                'alert_level' => null,
+              'alert_on' => FALSE,
+              'title' => 'Alert',
+              'message' => NULL,
+              'alert_level' => NULL,
             ],
-        ],
-    ];
+          ],
+  ];
 }

@@ -5,7 +5,7 @@ namespace Drupal\emergency_alerts\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 
 /**
- * Provides an 'EmergencyAlert' Block
+ * Provides an 'EmergencyAlert' Block.
  *
  * @Block(
  *   id = "emergency_alert",
@@ -13,44 +13,45 @@ use Drupal\Core\Block\BlockBase;
  * )
  */
 class EmergencyAlert extends BlockBase {
-  
-  var $config_key = 'emergency_alerts.settings';
-  
+
+  public $configKey = 'emergency_alerts.settings';
+
   /**
    * {@inheritdoc}
    */
   public function build() {
-  	$config = \Drupal::config($this->config_key);
+    $config = \Drupal::config($this->configKey);
 
-  	// get config variables
-  	$message = $config->get('alert_message');
-  	$level = $config->get('alert_level');
+    // Get config variables.
+    $message = $config->get('alert_message');
+    $level = $config->get('alert_level');
 
-  	// TODO: move the closable rules to config
-  	// check for a cookie
-  	$cookies = \Drupal::request()->cookies;
-  	$cookie_set = FALSE;
-  	if ($cookies->has('announcement')) {
-  		$cookie_set = ($cookies->get('announcement') == 'closed');
-  	}
+    // TODO: move the closable rules to config
+    // check for a cookie.
+    $cookies = \Drupal::request()->cookies;
+    $cookie_set = FALSE;
+    if ($cookies->has('announcement')) {
+      $cookie_set = ($cookies->get('announcement') == 'closed');
+    }
 
-  	// should alert be shown?
-  	$show_alert = $config->get('show_block')
-  		&& ($level != 'announcement' || !$cookie_set);
+    // Should alert be shown?
+    $show_alert = $config->get('show_block')
+          && ($level != 'announcement' || !$cookie_set);
 
     $render = [
       '#theme' => 'emergency_alert',
       '#alert_on' => $show_alert,
       '#title' => $config->get('alert_title'),
       '#message' => [
-      	'#type' => 'markup',
-      	'#markup' => $message['value'],
+        '#type' => 'markup',
+        '#markup' => $message['value'],
       ],
       '#alert_level' => $level,
     ];
 
-    $render['#cache']['tags'][] = 'config:'.$this->config_key;
+    $render['#cache']['tags'][] = 'config:' . $this->configKey;
 
     return $render;
   }
+
 }
