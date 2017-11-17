@@ -43,13 +43,10 @@ function emergency_alerts_theme_suggestions_html_alter(array &$suggestions, arra
 }
 
 /**
- * Implements hook_page_attachements().
+ * Implements hook_page_attachements() to make sure config cache tag goes on every page.
  */
 function emergency_alerts_page_attachments(array &$page) {
-  $config = \Drupal::config('emergency_alerts.settings');
-  if ($config->get('show_block')) {
-    $page['#attached']['library'][] = 'emergency_alerts/emergency_alerts';
-  }
+  $page['#cache']['tags'][] = 'config:emergency_alerts.settings';
 }
 
 /**
@@ -57,14 +54,12 @@ function emergency_alerts_page_attachments(array &$page) {
  */
 function emergency_alerts_theme($existing, $type, $theme, $path) {
   return [
-    'emergency_alert' =>
-          [
-            'variables' => [
-              'alert_on' => FALSE,
-              'title' => 'Alert',
-              'message' => NULL,
-              'alert_level' => NULL,
-            ],
-          ],
+    'emergency_alert' => [
+      'variables' => [
+        'title' => 'Alert',
+        'message' => [],
+        'alert_level' => NULL,
+      ],
+    ],
   ];
 }

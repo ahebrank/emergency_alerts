@@ -7,7 +7,6 @@
  * - title
  * - message
  * - alert_level
- * - alert_on
  *
  */
 #}
@@ -18,7 +17,6 @@
     (alert_level == 'announcement')? 'closeable'
   ]
 %}
-{% if alert_on %}
 <div{{ attributes.addClass(classes) }} {% if 'closeable' in classes %}data-closable{% endif %}>
   {% if 'closeable' in classes %}
   	<button class="close-button" aria-label="Close alert" type="button" data-close>
@@ -28,4 +26,3 @@
   <span class="title">{{ title }}</span>
   {{ message }}
 </div>
-{% endif %}

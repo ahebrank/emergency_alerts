@@ -97,9 +97,6 @@ class SettingsForm extends ConfigFormBase {
     $config->save();
 
     parent::submitForm($form, $form_state);
-
-    // flush everything
-    drupal_flush_all_caches();
   }
 
 }

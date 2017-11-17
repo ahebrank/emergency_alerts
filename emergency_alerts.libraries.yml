@@ -1,4 +1,4 @@
-emergency_alerts:
+persist_close:
   version: 1.x
   js:
     js/persist-close.js: {}

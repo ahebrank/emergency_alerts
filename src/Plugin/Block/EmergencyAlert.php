@@ -3,6 +3,7 @@
 namespace Drupal\emergency_alerts\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Cache\Cache;
 
 /**
  * Provides an 'EmergencyAlert' Block.
@@ -23,8 +24,8 @@ class EmergencyAlert extends BlockBase {
     $config = \Drupal::config($this->configKey);
 
     // Get config variables.
-    $message = $config->get('alert_message');
-    $level = $config->get('alert_level');
+    $message = $config->get('alert_message', FALSE);
+    $level = $config->get('alert_level', 'announcement');
 
     // TODO: move the closable rules to config
     // check for a cookie.
@@ -38,20 +39,27 @@ class EmergencyAlert extends BlockBase {
     $show_alert = $config->get('show_block')
           && ($level != 'announcement' || !$cookie_set);
 
-    $render = [
+    if (!$show_alert) {
+      return [];
+    }
+
+    $message_render = [];
+    if ($message) {
+      $message_render = check_markup($message['value'], $message['format']);
+    }
+
+    $build = [
       '#theme' => 'emergency_alert',
-      '#alert_on' => $show_alert,
       '#title' => $config->get('alert_title'),
-      '#message' => [
-        '#type' => 'markup',
-        '#markup' => $message['value'],
-      ],
+      '#message' => $message_render,
       '#alert_level' => $level,
+      '#attached' => [
+        'library' => [
+          'emergency_alerts/persist_close'
+        ],
+      ],
     ];
-
-    $render['#cache']['tags'][] = 'config:' . $this->configKey;
-
-    return $render;
+    return $build;
   }
 
 }
