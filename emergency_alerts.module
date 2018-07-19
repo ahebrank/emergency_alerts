@@ -29,16 +29,19 @@ function emergency_alerts_help($route_name, RouteMatchInterface $route_match) {
 function emergency_alerts_theme_suggestions_html_alter(array &$suggestions, array &$variables) {
   $config = \Drupal::config('emergency_alerts.settings');
   if ($config->get('override')) {
-    $suggestions[] = 'html__emergency_alert';
+    $is_admin = \Drupal::service('router.admin_context')->isAdminRoute();
+    if (!$is_admin) {
+      $suggestions[] = 'html__emergency_alert';
 
-    $message = $config->get('alert_message');
+      $message = $config->get('alert_message');
 
-    $variables['title'] = $config->get('alert_title');
-    $variables['message'] = [
-      '#type' => 'markup',
-      '#markup' => $message['value'],
-    ];
-    $variables['alert_level'] = $config->get('alert_level');
+      $variables['title'] = $config->get('alert_title');
+      $variables['message'] = [
+        '#type' => 'markup',
+        '#markup' => $message['value'],
+      ];
+      $variables['alert_level'] = $config->get('alert_level');
+    }
   }
 }
 
