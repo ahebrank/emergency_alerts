@@ -42,7 +42,7 @@ class SettingsForm extends ConfigFormBase {
     $form['control']['override'] = [
       '#type'  => 'checkbox',
       '#title' => t('Override every page with alert'),
-      '#description' => t('Only the main alert page is displayed (html--emergency template)'),
+      '#description' => t('Only the main alert page is displayed (html--emergency template). WARNING: this will replace every page on your site with a (single static) template!'),
       '#default_value' => $config->get('override'),
     ];
 
@@ -56,7 +56,7 @@ class SettingsForm extends ConfigFormBase {
     $form['control']['alert_level'] = [
       '#type'  => 'select',
       '#title' => t('Alert level'),
-      '#description' => t('How serious is this alert?  Affects style of block-level alert'),
+      '#description' => t('How serious is this alert?  Affects style of block-level alert. NOTE: it is recommended you do NOT use this alerting system for generic announcements. Reserve for emergencies only.'),
       '#options' => [
         'announcement' => t('Announcement'),
         'warning' => t('Warning'),
@@ -68,14 +68,14 @@ class SettingsForm extends ConfigFormBase {
     $form['control']['alert_title'] = [
       '#type'  => 'textfield',
       '#title' => t('Alert title'),
-      '#description' => t('One or two word title'),
+      '#description' => t('One or two word title for your emergency notification'),
       '#default_value' => $config->get('alert_title'),
     ];
 
     $message = $config->get('alert_message', NULL);
     $form['control']['alert_message'] = [
       '#type'  => 'text_format',
-      '#title' => t('Alert message'),
+      '#title' => t('Alert message. More details about the emergency -- include relevant links and contact information.'),
       '#description' => '',
       '#format' => $message ? $message['format'] : 'basic_html',
       '#default_value' => $message ? $message['value'] : '',

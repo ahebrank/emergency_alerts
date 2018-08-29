@@ -1,5 +1,5 @@
 override: FALSE
 show_block: FALSE
-alert_level: 'announcement'
+alert_level: 'warning'
 alert_title: ''
 alert_message: ''
