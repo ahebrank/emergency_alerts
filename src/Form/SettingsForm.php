@@ -34,12 +34,7 @@ class SettingsForm extends ConfigFormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->config($this->packageName . '.settings');
 
-    $form['control'] = [
-      '#type' => 'fieldset',
-      '#title' => t('Emergency Alerts Settings'),
-    ];
-
-    $form['control']['override'] = [
+    $form['override'] = [
       '#type'  => 'checkbox',
       '#title' => t('Override every page with alert'),
       '#description' => t('Only the main alert page is displayed (html--emergency-alert.html.twig template). WARNING: this will replace every page on your site with a (single static) template!'),
@@ -51,7 +46,7 @@ class SettingsForm extends ConfigFormBase {
       ]
     ];
 
-    $form['control']['show_block'] = [
+    $form['show_block'] = [
       '#type'  => 'checkbox',
       '#title' => t('Show alert message'),
       '#description' => t('Use emergency_alert block (emergency-alert.html.twig) to show alert content'),
@@ -63,7 +58,7 @@ class SettingsForm extends ConfigFormBase {
       ]
     ];
 
-    $form['control']['alert_level'] = [
+    $form['alert_level'] = [
       '#type'  => 'select',
       '#title' => t('Alert level'),
       '#description' => t('How serious is this alert?  Affects style of block-level alert. NOTE: it is recommended you do NOT use this alerting system for generic announcements. Reserve for emergencies only.'),
@@ -80,7 +75,7 @@ class SettingsForm extends ConfigFormBase {
       ]
     ];
 
-    $form['control']['alert_title'] = [
+    $form['alert_title'] = [
       '#type'  => 'textfield',
       '#title' => t('Alert title'),
       '#description' => t('One or two word title for your emergency notification'),
@@ -88,7 +83,7 @@ class SettingsForm extends ConfigFormBase {
     ];
 
     $message = $config->get('alert_message', NULL);
-    $form['control']['alert_message'] = [
+    $form['alert_message'] = [
       '#type'  => 'text_format',
       '#title' => t('Alert message. More details about the emergency -- include relevant links and contact information.'),
       '#description' => '',
