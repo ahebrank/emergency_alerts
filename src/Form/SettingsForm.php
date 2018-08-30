@@ -42,15 +42,25 @@ class SettingsForm extends ConfigFormBase {
     $form['control']['override'] = [
       '#type'  => 'checkbox',
       '#title' => t('Override every page with alert'),
-      '#description' => t('Only the main alert page is displayed (html--emergency template). WARNING: this will replace every page on your site with a (single static) template!'),
+      '#description' => t('Only the main alert page is displayed (html--emergency-alert.html.twig template). WARNING: this will replace every page on your site with a (single static) template!'),
       '#default_value' => $config->get('override'),
+      '#states' => [
+        'visible' => [
+          ':input[name="show_block"]' => ['checked' => FALSE],
+        ]
+      ]
     ];
 
     $form['control']['show_block'] = [
       '#type'  => 'checkbox',
       '#title' => t('Show alert message'),
-      '#description' => t('Use emergency_alert block to show alert content'),
+      '#description' => t('Use emergency_alert block (emergency-alert.html.twig) to show alert content'),
       '#default_value' => $config->get('show_block'),
+      '#states' => [
+        'visible' => [
+          ':input[name="override"]' => ['checked' => FALSE],
+        ]
+      ]
     ];
 
     $form['control']['alert_level'] = [
@@ -63,6 +73,11 @@ class SettingsForm extends ConfigFormBase {
         'danger' => t('Danger'),
       ],
       '#default_value' => $config->get('alert_level'),
+      '#states' => [
+        'visible' => [
+          ':input[name="override"]' => ['checked' => FALSE],
+        ]
+      ]
     ];
 
     $form['control']['alert_title'] = [
