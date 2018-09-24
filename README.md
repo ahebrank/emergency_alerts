@@ -1,11 +1,46 @@
-# Emergency Alerts
+CONTENTS OF THIS FILE
+---------------------
 
-A Drupal 8 module to provide emergency alerts.
+ * Introduction
+ * Requirements
+ * Installation
+ * Configuration
+ * Maintainers
 
-## Quickstart
 
-Enable this module and configure to set alert title and message,
-severity, and to turn on block or full page override.
+INTRODUCTION
+------------
+
+The Emergency Alerts module provides emergency alerts. These are the important
+announcements you might see at the top of academic sites.
+
+ * For a full description of the module, visit the project page:
+   https://www.drupal.org/project/emergency_alerts
+
+ * To submit bug reports and feature suggestions, or to track changes:
+   https://www.drupal.org/project/issues/emergency_alerts
+
+
+REQUIREMENTS
+------------
+
+This module requires no modules outside of Drupal core.
+
+
+INSTALLATION
+------------
+
+ * Install the Emergency Alerts module as you would normally install a
+   contributed Drupal module. Visit https://www.drupal.org/node/1897420 for
+   further information.
+
+
+CONFIGURATION
+-------------
+
+    1. Navigate to Administration > Extend and enable the module.
+    2. Navigate to admin/config/emergency_alerts to configure.
+    3. Navigate to admin/structure/block to place the block.
 
 (optional) Add region `emergency_alert` to your theme and in templates.
 For example (in theme.info.yml),
@@ -31,3 +66,12 @@ Add styling for the alert region div with classes:
 - `.emergency-alert.announcement`
 - `.emergency-alert.warning`
 - `.emergency-alert.danger`
+
+
+MAINTAINERS
+-----------
+
+ * Andy Hebrank (ahebrank) - https://www.drupal.org/u/ahebrank
+
+Supporting organization:
+ * New City - https://www.drupal.org/newcity
