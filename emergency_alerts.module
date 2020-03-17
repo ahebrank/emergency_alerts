@@ -46,14 +46,6 @@ function emergency_alerts_theme_suggestions_html_alter(array &$suggestions, arra
 }
 
 /**
- * Implements hook_page_attachements().
- */
-function emergency_alerts_page_attachments(array &$variables) {
-  $config = \Drupal::config('emergency_alerts.settings');
-  \Drupal::service('renderer')->addCacheableDependency($variables, $config);
-}
-
-/**
  * Implements hook_theme().
  */
 function emergency_alerts_theme($existing, $type, $theme, $path) {

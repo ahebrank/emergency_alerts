@@ -36,12 +36,7 @@ class EmergencyAlert extends BlockBase {
     }
 
     // Should alert be shown?
-    $show_alert = $config->get('show_block')
-          && ($level != 'announcement' || !$cookie_set);
-
-    if (!$show_alert) {
-      return [];
-    }
+    $show_alert = $config->get('show_block') && !$cookie_set;
 
     $message_render = [];
     if ($message) {
@@ -49,16 +44,21 @@ class EmergencyAlert extends BlockBase {
     }
 
     $build = [
+      '#access' => $show_alert,
       '#theme' => 'emergency_alert',
       '#title' => $config->get('alert_title'),
       '#message' => $message_render,
       '#alert_level' => $level,
       '#attached' => [
         'library' => [
-          'emergency_alerts/persist_close'
+          'emergency_alerts/persist_close',
         ],
       ],
     ];
+
+    // Add a dependency on the alert config.
+    \Drupal::service('renderer')->addCacheableDependency($build, $config);
+
     return $build;
   }
 
