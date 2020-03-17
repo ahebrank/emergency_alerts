@@ -21,7 +21,7 @@ class EmergencyAlert extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    $config = \Drupal::config($this->configKey);
+    $config = \Drupal::service('config.factory')->getEditable($this->configKey);
 
     // Get config variables.
     $message = $config->get('alert_message', FALSE);
