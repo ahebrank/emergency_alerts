@@ -14,7 +14,7 @@
     attach: function (context) {
       $('.emergency-alert .close-button').on('click', function() {
         setCookie(cookieName, 'closed', 1);
-        $(this).closest('data-closeable').hide();
+        $(this).closest('[data-closeable]').hide();
       });
     }
   };

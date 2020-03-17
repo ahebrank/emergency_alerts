@@ -34,6 +34,8 @@ class EmergencyAlert extends BlockBase {
     if ($cookies->has('announcement')) {
       $cookie_set = ($cookies->get('announcement') == 'closed');
     }
+    // Get this into config to affect cacheablility.
+    $config->set('closed_by_cookie', $cookie_set);
 
     // Should alert be shown?
     $show_alert = $config->get('show_block') && !$cookie_set;
@@ -56,8 +58,9 @@ class EmergencyAlert extends BlockBase {
       ],
     ];
 
-    // Add a dependency on the alert config.
-    \Drupal::service('renderer')->addCacheableDependency($build, $config);
+    // Add a dependency on the alert config and cookie.
+    $renderer = \Drupal::service('renderer');
+    $renderer->addCacheableDependency($build, $config);
 
     return $build;
   }
