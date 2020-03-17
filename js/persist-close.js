@@ -1,14 +1,14 @@
 /**
  * @file persist-close.js
  *
- * Keep an alert closed
+ * Close and keep an alert closed
  */
+
+"use strict";
 
 (function ($, Drupal, drupalSettings) {
 
-  'use strict';
-
-  var cookieName = 'announcement';
+  var cookieName = 'emergency-alert';
 
   Drupal.behaviors.emergencyAlerts = {
     attach: function (context) {

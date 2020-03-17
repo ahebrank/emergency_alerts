@@ -31,8 +31,8 @@ class EmergencyAlert extends BlockBase {
     // check for a cookie.
     $cookies = \Drupal::request()->cookies;
     $cookie_set = FALSE;
-    if ($cookies->has('announcement')) {
-      $cookie_set = ($cookies->get('announcement') == 'closed');
+    if ($cookies->has('emergency-alert')) {
+      $cookie_set = ($cookies->get('emergency-alert') == 'closed');
     }
     // Get this into config to affect cacheablility.
     $config->set('closed_by_cookie', $cookie_set);
