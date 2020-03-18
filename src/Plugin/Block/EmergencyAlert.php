@@ -21,21 +21,18 @@ class EmergencyAlert extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    $config = \Drupal::service('config.factory')->getEditable($this->configKey);
+    $config = \Drupal::config($this->configKey);
 
     // Get config variables.
     $message = $config->get('alert_message', FALSE);
     $level = $config->get('alert_level', 'announcement');
 
-    // TODO: move the closable rules to config
-    // check for a cookie.
+    // Check for a cookie.
     $cookies = \Drupal::request()->cookies;
     $cookie_set = FALSE;
     if ($cookies->has('emergency-alert')) {
       $cookie_set = ($cookies->get('emergency-alert') == 'closed');
     }
-    // Get this into config to affect cacheablility.
-    $config->set('closed_by_cookie', $cookie_set);
 
     // Should alert be shown?
     $show_alert = $config->get('show_block') && !$cookie_set;

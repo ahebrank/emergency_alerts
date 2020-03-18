@@ -16,6 +16,10 @@
         setCookie(cookieName, 'closed', 1);
         $(this).closest('[data-closeable]').hide();
       });
+
+      if (getCookie(cookieName) == 'closed') {
+        $('.emergency-alert.closeable').hide();
+      }
     }
   };
 
