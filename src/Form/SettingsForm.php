@@ -113,12 +113,4 @@ class SettingsForm extends ConfigFormBase {
     parent::submitForm($form, $form_state);
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function getCacheTags() {
-    // Add a cache dependency on the module config.
-    return Cache::mergeTags(parent::getCacheTags(), ['config:' . $this->configKey]);
-  }
-
 }
